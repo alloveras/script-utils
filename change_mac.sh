@@ -69,7 +69,7 @@ until [ $DONE -eq 1 ]; do
         print_success "The new fake MAC address (${NEW_MAC}) has been assigned to ${NIC}."
         DONE=1
     else
-        print_warning "Couldn't assing the new fake MAC address (${NEW_MAC}) to ${NIC}."
+        print_warning "Couldn't assign the new fake MAC address (${NEW_MAC}) to ${NIC}."
         print_info "Retrying..."
     fi
 done
