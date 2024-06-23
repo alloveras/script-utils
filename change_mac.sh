@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################################################################
-# Copyright © 2018 Albert Lloveras Carbonell (@_alloveras)
+# Copyright © 2018 Albert Lloveras Carbonell (@alloveras)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
@@ -48,7 +48,7 @@ fi
 if [ $# -eq 0 ]; then
     NIC=${DEFAULT_NIC}
 else
-    # Check that specified network interface exists.
+    # Check that the specified network interface exists.
     ifconfig "$1" > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         NIC=$1
@@ -62,7 +62,7 @@ fi
 until [ $DONE -eq 1 ]; do
     NEW_MAC=`openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'`
     print_info "Generated new fake MAC address (${NEW_MAC})."
-    print_info "Trying to assing new fake MAC address to ${NIC}..."
+    print_info "Trying to assign new fake MAC address to ${NIC}..."
     sudo ifconfig "${NIC}" lladdr "${NEW_MAC}" 
     CURRENT_MAC=`ifconfig "${DEFAULT_NIC}" | grep -i ether | awk '{print $2}'`
     if [ "${CURRENT_MAC}" == "${NEW_MAC}" ]; then
